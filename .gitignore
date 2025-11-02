@@ -1,0 +1,19 @@
+# Claude Code runtime files
+history.jsonl
+settings.json
+.DS_Store
+*.swp
+
+# Session data
+debug/
+file-history/
+shell-snapshots/
+statsig/
+todos/
+session-env/
+
+# Project-specific data
+projects/
+
+# Plugins (may contain user-specific data)
+plugins/
