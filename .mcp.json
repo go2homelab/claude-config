@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "mcp-ical": {
+      "type": "stdio",
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/Users/gru/studiobsync/2.homelab/projects_c/mcp-ical",
+        "run",
+        "mcp-ical"
+      ],
+      "env": {}
+    }
+  }
+}
