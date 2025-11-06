@@ -12,6 +12,8 @@ This is a **homelab environment** with enterprise-grade networking, storage, and
 - **Syncthing Root**: `~/studiobsync/2.homelab/`
 - **Main Homelab Repo**: `~/studiobsync/2.homelab/projects_c/go2homelab/`
 - **Claude Config**: `~/.claude/` (symlinked to `~/studiobsync/2.homelab/claude_config/`)
+- **Obsidian Vault (_career_obs)**: `/Users/gru/Library/Mobile Documents/com~apple~CloudDocs/_career_obs/` (iCloud synced)
+- **Obsidian Vault (medfam_obs)**: `/Users/gru/medfam_obs/` (Medical family tracking)
 - **Network Drive**: `/Volumes/studioB/` (SMB/CIFS share - always accessible)
 
 ## Network Storage
@@ -20,9 +22,21 @@ This is a **homelab environment** with enterprise-grade networking, storage, and
 
 - **Path**: `/Volumes/studioB/`
 - **Type**: SMB/CIFS network share
+- **Server**: 192.168.3.50 (gnas._smb._tcp.local)
 - **Status**: Pre-configured in permissions - no prompts needed
 - **Purpose**: Shared homelab storage accessible across all devices
 - **Configuration**: See `settings.json` → `permissions.additionalDirectories`
+- **Reconnect Script**: `~/studiobsync/2.homelab/scripts/reconnect-smb-drives.sh`
+
+### allgfamdocs Network Drive
+
+- **Path**: `/Volumes/allgfamdocs/`
+- **Type**: SMB/CIFS network share
+- **Server**: 192.168.3.50 (gnas._smb._tcp.local)
+- **Status**: Pre-configured in permissions - no prompts needed
+- **Purpose**: Shared homelab storage accessible across all devices
+- **Configuration**: See `settings.json` → `permissions.additionalDirectories`
+- **Reconnect Script**: `~/studiobsync/2.homelab/scripts/reconnect-smb-drives.sh`
 
 ## Syncthing Setup
 
@@ -85,6 +99,25 @@ When committing, follow these patterns seen in the repository:
 
 Simply use `/Volumes/studioB/path/to/file` - it's pre-configured in permissions.
 
+### Reconnecting SMB Drives
+
+If the network drives become disconnected, use the reconnect script:
+```bash
+~/studiobsync/2.homelab/scripts/reconnect-smb-drives.sh
+```
+
+This script automatically reconnects:
+- `/Volumes/studioB` from 192.168.3.50
+- `/Volumes/allgfamdocs` from 192.168.3.50
+
+The drives are hosted on `gnas._smb._tcp.local` and mount as SMB shares.
+
+### Accessing Obsidian Vaults
+
+**_career_obs vault:** `/Users/gru/Library/Mobile Documents/com~apple~CloudDocs/_career_obs/` (iCloud synced)
+
+**medfam_obs vault:** `/Users/gru/medfam_obs/` (Medical family tracking - used by gmed agent)
+
 ### Documentation
 
 Documentation is highly valued here. When making changes:
@@ -100,10 +133,20 @@ Documentation is highly valued here. When making changes:
 cd ~/studiobsync/2.homelab/projects_c/go2homelab/
 
 # Claude configuration
-cd ~/.claude/  # or ~/studiobsync/2.homelab/claude_config/
+#cd ~/.claude/  # or ~/studiobsync/2.homelab/claude_config/
+cd ~/studiobsync/2.homelab/claude_config/
+
+# Obsidian vault (_career_obs)
+cd "/Users/gru/Library/Mobile Documents/com~apple~CloudDocs/_career_obs/"
+
+# Obsidian vault (medfam_obs) - Medical family tracking
+cd /Users/gru/medfam_obs/
 
 # Network drive
 cd /Volumes/studioB/
+
+# Reconnect SMB drives
+~/studiobsync/2.homelab/scripts/reconnect-smb-drives.sh
 
 # Check Syncthing sync status
 ls -la ~/studiobsync/2.homelab/
